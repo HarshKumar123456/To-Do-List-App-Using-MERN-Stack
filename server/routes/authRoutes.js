@@ -15,15 +15,18 @@ authRouter.get("/google", passport.authenticate("google", { scope: ["profile"] }
 
 
 /**
- * @authRouter /auth/google/callback
+ * @authRouter /auth/google/secrets
  * @description take logged user to signed in page view
  * @access protected
  */
 authRouter.get("/google/secrets", await passport.authenticate("google", { failureRedirect: "/login" }),
     function (req, res) {
+        const googleId = req.user.googleId;
+        const mongoDbId = req.user._id;
         // Successful authentication, redirect home.
-        console.log("User is authenticated with OAuth2.0 Google");
-        res.redirect("/ourToDoApi/todo");
+        console.log(`User is authenticated with OAuth2.0 Google and UserId is ${googleId} and MongoDB Id is ${mongoDbId}`);
+        // console.log(req);
+        res.status(200).json({message: "User is authenticated",userId: mongoDbId});
     });
 
 export default authRouter;

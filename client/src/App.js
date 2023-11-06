@@ -9,6 +9,9 @@ import CreateTodo from "./components/CreateTodo";
 import HomePage from "./components/HomePage";
 import EditTodos from "./components/EditTodo";
 import DeleteTodos from "./components/DeleteTodo";
+import Footer from "./components/Footer";
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
 
 function App() {
   return (
@@ -21,7 +24,10 @@ function App() {
           <Route path="/create" element={<CreateTodo />} />
           <Route path="/edit" element={<EditTodos />} />
           <Route path="/delete" element={<DeleteTodos />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

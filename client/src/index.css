@@ -11,3 +11,51 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.navbar-brand{
+  font-size: 2rem;
+}
+.main-heading{
+  color: blueviolet;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.main-grid{
+  /* border: 1px solid red; */
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  text-align: center;
+}
+
+.main-grid-heading{
+  font-size: 4rem;
+  grid-row: span 3;
+  grid-column: span 4;
+}
+
+.main-grid-element{
+  grid-column-start: 2;
+  grid-column-end: 4;
+  /* border: 1px solid red; */
+}
+
+.main-grid-element a{
+  text-decoration: none;
+  margin: 0 2rem;
+}
+
+footer{
+  margin-top: auto;
+}
+
+.tasks{
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.194);
+  text-align: center;
+}

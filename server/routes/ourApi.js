@@ -18,18 +18,18 @@ router.use((req, res, next) => {
   });
 
 /**
- * @route GET ourToDoApi/todo
+ * @route GET ourToDoApi/todo/:id
  * @description get all todo
  * @access protected
  */
-router.get("/", getAllTodo);
+router.get("/:id", getAllTodo);
 
 /**
- * @route POST ourToDoApi/todo
+ * @route POST ourToDoApi/todo/:id
  * @description add a new todo
  * @access protected
  */
-router.post("/", postCreateTodo);
+router.post("/:id", postCreateTodo);
 
 /**
  * @route PUT ourToDoApi/todo/:id

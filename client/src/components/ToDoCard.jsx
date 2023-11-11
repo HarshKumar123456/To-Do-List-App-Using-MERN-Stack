@@ -1,14 +1,14 @@
 import React from "react";
 import "../componentCSS/toDoCard.css";
 
-function ToDoCard() {
+function ToDoCard(props) {
     return <div class="container to-do-card">
         <div class="to-detail-container">
             <div class="to-do-title">
-                <h2>To Do Title</h2>
+                <h2>{props.title}</h2>
             </div>
             <div class="to-do-description">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod reiciendis dignissimos, eum neque dicta libero magnam quo veritatis consectetur maxime beatae laborum, tempore recusandae amet, deleniti deserunt eveniet dolorem doloremque. Corporis quo atque alias aspernatur consequuntur voluptate natus vero obcaecati.</p>
+                <p>{props.description}</p>
             </div>
         </div>
         <div class="button-container">

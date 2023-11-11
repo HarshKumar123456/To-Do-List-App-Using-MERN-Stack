@@ -1,48 +1,68 @@
 import React, { useEffect, useState } from "react";
-import Link from "react-router-dom";
 import axios from "axios";
 import ToDoCard from "./ToDoCard";
 import NotRegistered from "./NotRegistered";
 
 function ShowTodos() {
-    const [isRegistered, setRegiteredStatus] = useState(false);
+    const [isUserIsRegistered, setRegisteredStatus] = useState(false);
+    // eslint-disable-next-line
     const [user, setUser] = useState();
     const [userId, setUserId] = useState("");
-    // const [userToDos,setToDos] = useState([]);
-    var userToDos = [1,2];
+    // eslint-disable-next-line
+    const [userToDos, setToDos] = useState([]);
+    // eslint-disable-next-line
+    const [todosFetched, setTodoFetchedStatus] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/getUser', { withCredentials: true });
-                if (response.data) {
-                    setUser(response.data);
-                    setUserId(response.data._id);
-                    setRegiteredStatus(true);
+                if (!isUserIsRegistered) {
+                    const response = await axios.get('http://localhost:3000/getUser', { withCredentials: true });
+                    if (response.data) {
+                        setUser(response.data);
+                        setUserId(response.data._id);
+                        setRegisteredStatus(true);
+
+                        // Fetch todos only if the user is registered
+                        const todosResponse = await axios.get(
+                            `http://localhost:3000/ourToDoApi/todo/${response.data._id}`,
+                            { withCredentials: true }
+                        );
+                        setToDos(todosResponse.data);
+                        setTodoFetchedStatus(true);
+                    }
                 }
             } catch (error) {
-                // Handle the error here
                 console.error("Error fetching user data:", error);
                 setUser("User not found");
                 setUserId("User not Found to kahe ki id");
-                setRegiteredStatus(false);
+                setRegisteredStatus(false);
             }
         };
 
-        fetchData();
-    }, []);
+        fetchData(); // Always fetch user data on component mount
 
+    }, [isUserIsRegistered]); // Run this effect only when isUserIsRegistered changes
 
-    console.log(user);
-    var userToDos = [1, 2];
-    console.log(userId);
-    return <div>
-        {isRegistered ? (<div className="main-to-do-container">
-            Bhai user is : {userId}
-            {userToDos.map((todo) => {
-                return <ToDoCard />;
-            })}
-        </div>) : (<NotRegistered />)}
-    </div>;
+    return (
+        <div>
+            {isUserIsRegistered ? (
+                <div className="main-to-do-container">
+                    Bhai user is: {userId}
+                    {userToDos.map((todo) => (
+                        <ToDoCard
+                            key={todo._id}
+                            id={todo._id}
+                            title={todo.title}
+                            description={todo.description}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <NotRegistered />
+            )}
+        </div>
+    );
 }
 
 export default ShowTodos;

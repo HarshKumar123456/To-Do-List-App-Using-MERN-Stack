@@ -1,0 +1,14 @@
+.not-registerd-container{
+    text-align: center;
+    min-height: 200px;
+}
+
+.not-registerd-container > h2{
+    font-size: 4rem;
+}
+
+.not-registered-go-to-home-saying-container  a{
+    text-align: center;
+    font-size: 2rem;
+    width: 100%;
+}

@@ -46,8 +46,14 @@ async function deleteToDoFromList(req,res){
 
 async function getAllTodo(req, res) {
     console.log("In Get all todo");
+    console.log("printing body");
+    console.log(req.body);
+    console.log(req.params);
+    console.log(req.params.id);
+    console.log("Printed body");
     try {
-        const user = await User.findById(req.body.userId);
+        const user = await User.findById(req.params.id);
+        console.log(user);
         console.log(user.todos);
         user.todos ? res.status(200).json(user.todos) : res.status(404).json({ message: "Something got wrong" });
     } catch (err) {
@@ -58,6 +64,9 @@ async function getAllTodo(req, res) {
 
 async function postCreateTodo(req, res) {
     console.log("In post todo");
+    console.log("printing body");
+    console.log(req.body);
+    console.log("Printed body");
     await createToDoInList(req,res);
 }
 

@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import passport from "../strategies/googleStrategy.js";
 
-const authRouter = express();
+const authRouter = express.Router();
 
 authRouter.use(bodyParser.urlencoded({ extended: true }));
 
@@ -26,7 +26,8 @@ authRouter.get("/google/secrets", await passport.authenticate("google", { failur
         // Successful authentication, redirect home.
         console.log(`User is authenticated with OAuth2.0 Google and UserId is ${googleId} and MongoDB Id is ${mongoDbId}`);
         // console.log(req);
-        res.status(200).json({message: "User is authenticated",userId: mongoDbId});
+        // res.status(200).json({message: "User is authenticated",userId: mongoDbId,registerStatus: true});
+        res.redirect(`http://localhost:3001/`);
     });
 
 export default authRouter;

@@ -13,7 +13,9 @@ function ToDoCard(props) {
         </div>
         <div className="button-container d-flex">
 
-            <button type="button" className="btn delete-button">
+            <button type="button" className="btn delete-button"  onClick={() => {
+                props.onDelete(props.id);
+            }}>
                 <img width="40" height="40" src="https://img.icons8.com/arcade/64/recycle-bin.png" alt="recycle-bin" />
             </button>
             <button type="button" className="btn edit-button">

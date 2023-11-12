@@ -68,6 +68,17 @@ function ShowTodos() {
         }
     }
 
+    async function deleteToDo(idOfToDo){
+        try {
+            const afterDeleteToDoResponse = await axios.delete(`http://localhost:3000/ourToDoApi/todo/${userId}?toDoId=${idOfToDo}`,{withCredentials: true});
+            console.log(afterDeleteToDoResponse.data);
+            setToDos(afterDeleteToDoResponse.data.data);
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            setToDos(null);
+        }
+    }
+
 
     async function handleShowButtonClick() {
         console.log("Show button is clicked ");
@@ -75,9 +86,9 @@ function ShowTodos() {
         console.log("Show button is clicked function ended");
     }
 
-    async function handleDeleteButtonClick() {
+    async function handleDeleteButtonClick(idOfToDo) {
         console.log("Delete button is clicked ");
-        await fetchToDos();
+        await deleteToDo(idOfToDo);
         console.log("Delete button is clicked function ended");
     }
 

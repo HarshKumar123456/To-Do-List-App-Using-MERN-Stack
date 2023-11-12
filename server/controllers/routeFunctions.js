@@ -31,7 +31,11 @@ async function updateToDoInList(req, res) {
 }
 
 async function deleteToDoFromList(req,res){
-    const { userId, todoId} = req.body;
+    console.log(req.params);
+    console.log(req.query);
+    const userId = req.params.id;
+    const todoId = req.query.toDoId;
+    // console.log(userId+" ha ha ha ha "+todoId);
     try {
         const update = await User.findOneAndUpdate({ _id: userId,'todos._id': todoId },
         { $pull: { todos: { _id: todoId } } });

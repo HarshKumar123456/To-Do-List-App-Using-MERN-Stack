@@ -15,7 +15,6 @@ function ShowTodos() {
     const [todosFetched, setTodoFetchedStatus] = useState(false);
 
     const [createBoxOpened,setCreateBoxOpenedStatus] = useState(false);
-    const [editBoxOpened,setEditBoxOpenedStatus] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,6 +67,18 @@ function ShowTodos() {
         }
     }
 
+    async function editToDo(todoToBeUpdated){
+        try{
+            const afterUpdateTodosResponse = await axios.put(`http://localhost:3000/ourToDoApi/todo/${userId}`,{...todoToBeUpdated,userId: userId},{withCredentials: true});
+            console.log(afterUpdateTodosResponse);
+            setToDos(afterUpdateTodosResponse.data.data);
+        }
+        catch(error){
+            console.error("Error fetching user data:", error);
+            setToDos(null);
+        }
+    }
+
     async function deleteToDo(idOfToDo){
         try {
             const afterDeleteToDoResponse = await axios.delete(`http://localhost:3000/ourToDoApi/todo/${userId}?toDoId=${idOfToDo}`,{withCredentials: true});
@@ -92,9 +103,9 @@ function ShowTodos() {
         console.log("Delete button is clicked function ended");
     }
 
-    async function handleEditButtonClick() {
+    async function handleEditButtonClick(updatedTodo) {
         console.log("Edit button is clicked ");
-        await fetchToDos();
+        await editToDo(updatedTodo);
         console.log("Edit button is clicked function ended");
     }
 
@@ -129,6 +140,7 @@ function ShowTodos() {
                         </div>
 
                     </div>
+                    {(userToDos && userToDos.length === 0) && ( <div className="container no-to-dos-message-container m-2 p-2"><h2>You Have no To Dos for Now....</h2></div> )}
                     {userToDos && userToDos.map((todo) => (
                         <ToDoCard
                             key={todo._id}

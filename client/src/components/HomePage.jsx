@@ -14,7 +14,7 @@ function HomePage() {
     async function registerUser() {
         console.log("In Register user function ");
         console.log("printed data\n");
-        await window.open("http://localhost:3000/auth/google", "_self");
+        await window.open(`${process.env.REACT_APP_SERVER_URL}/auth/google`, "_self");
 
     }
 
@@ -22,7 +22,7 @@ function HomePage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/getUser', { withCredentials: true });
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getUser`, { withCredentials: true });
                 if (response.data) {
                     setUser(response.data);
                     setUserId(response.data._id);

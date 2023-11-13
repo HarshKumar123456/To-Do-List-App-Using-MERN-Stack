@@ -20,7 +20,7 @@ function ShowTodos() {
         const fetchData = async () => {
             try {
                 if (!isUserIsRegistered) {
-                    const response = await axios.get('http://localhost:3000/getUser', { withCredentials: true });
+                    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getUser`, { withCredentials: true });
                     if (response.data) {
                         setUser(response.data);
                         setUserId(response.data._id);
@@ -43,7 +43,7 @@ function ShowTodos() {
         try {
             if (isUserIsRegistered) {
                 const todosResponse = await axios.get(
-                    `http://localhost:3000/ourToDoApi/todo/${userId}`,
+                    `${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${userId}`,
                     { withCredentials: true }
                 );
                 setToDos(todosResponse.data);
@@ -57,7 +57,7 @@ function ShowTodos() {
 
     async function createToDos(todoToBeAdded){
         try{
-            const newTodosResponse = await axios.post(`http://localhost:3000/ourToDoApi/todo/${todoToBeAdded.userId}`,todoToBeAdded,{withCredentials: true});
+            const newTodosResponse = await axios.post(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${todoToBeAdded.userId}`,todoToBeAdded,{withCredentials: true});
             console.log(newTodosResponse);
             setToDos(newTodosResponse.data.data);
         }
@@ -69,7 +69,7 @@ function ShowTodos() {
 
     async function editToDo(todoToBeUpdated){
         try{
-            const afterUpdateTodosResponse = await axios.put(`http://localhost:3000/ourToDoApi/todo/${userId}`,{...todoToBeUpdated,userId: userId},{withCredentials: true});
+            const afterUpdateTodosResponse = await axios.put(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${userId}`,{...todoToBeUpdated,userId: userId},{withCredentials: true});
             console.log(afterUpdateTodosResponse);
             setToDos(afterUpdateTodosResponse.data.data);
         }
@@ -81,7 +81,7 @@ function ShowTodos() {
 
     async function deleteToDo(idOfToDo){
         try {
-            const afterDeleteToDoResponse = await axios.delete(`http://localhost:3000/ourToDoApi/todo/${userId}?toDoId=${idOfToDo}`,{withCredentials: true});
+            const afterDeleteToDoResponse = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${userId}?toDoId=${idOfToDo}`,{withCredentials: true});
             console.log(afterDeleteToDoResponse.data);
             setToDos(afterDeleteToDoResponse.data.data);
         } catch (error) {

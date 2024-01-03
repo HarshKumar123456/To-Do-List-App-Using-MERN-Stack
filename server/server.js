@@ -5,9 +5,12 @@ import cors from "cors";
 import session from "express-session";
 import User from "./models/mongooseModel.js";
 import passport from "./strategies/googleStrategy.js";
-
+import { fileURLToPath } from 'url';
+import path from "path";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // routes
 import todo from "./routes/ourApi.js";
@@ -16,6 +19,8 @@ import newUser from "./routes/loginRegisterRoutes.js";
 
 connectDB();
 
+ 
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 // cors
 app.use(cors({ origin: true, credentials: true }));
@@ -38,18 +43,21 @@ app.use((req, res, next) => {
     console.log(`In server Accessing route: ${req.method} ${req.path} at ${new Date()}`);
     next();
   });
+
+
 // Authorisation Step ke liye Middelware
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes); // Ye Front-end se request aayengi unko handle karega 
+app.use("/auth",authRoutes); // Ye jab google se request aayengi to unko handle karega
 
 // Login yaa register ke liye Middleware
-app.use("/new",newUser);
+app.use("/api/new",newUser);
 
 
-app.get("/", (req, res) => res.send("Server up and running"));
+app.get("/api", (req, res) => res.send("Server up and running"));
 
 
 // use routes
-app.use("/ourToDoApi/todo", todo);
+app.use("/api/ourToDoApi/todo", todo);
 
 // here is an example of a custom authenticate express middleware 
 // const authenticated = (req,res,next)=>{
@@ -68,9 +76,12 @@ const authenticated = (err, req, res, next) => {
     }
   };
 
-app.get("/getUser",authenticated, (req, res)=> res.send(req.user));
+app.get("/api/getUser",authenticated, (req, res)=> res.send(req.user));
 
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+});
 // setting up port
 const PORT = process.env.PORT || 8000;
 

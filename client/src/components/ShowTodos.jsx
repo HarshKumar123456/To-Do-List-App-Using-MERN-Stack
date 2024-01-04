@@ -14,7 +14,7 @@ function ShowTodos() {
     // eslint-disable-next-line
     const [todosFetched, setTodoFetchedStatus] = useState(false);
 
-    const [createBoxOpened,setCreateBoxOpenedStatus] = useState(false);
+    const [createBoxOpened, setCreateBoxOpenedStatus] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,6 +37,8 @@ function ShowTodos() {
 
         fetchData(); // Always fetch user data on component mount
 
+        
+
     }, [isUserIsRegistered]); // Run this effect only when isUserIsRegistered changes
 
     async function fetchToDos() {
@@ -55,33 +57,33 @@ function ShowTodos() {
         }
     };
 
-    async function createToDos(todoToBeAdded){
-        try{
-            const newTodosResponse = await axios.post(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${todoToBeAdded.userId}`,todoToBeAdded,{withCredentials: true});
+    async function createToDos(todoToBeAdded) {
+        try {
+            const newTodosResponse = await axios.post(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${todoToBeAdded.userId}`, todoToBeAdded, { withCredentials: true });
             console.log(newTodosResponse);
             setToDos(newTodosResponse.data.data);
         }
-        catch(error){
+        catch (error) {
             console.error("Error fetching user data:", error);
             setToDos(null);
         }
     }
 
-    async function editToDo(todoToBeUpdated){
-        try{
-            const afterUpdateTodosResponse = await axios.put(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${userId}`,{...todoToBeUpdated,userId: userId},{withCredentials: true});
+    async function editToDo(todoToBeUpdated) {
+        try {
+            const afterUpdateTodosResponse = await axios.put(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${userId}`, { ...todoToBeUpdated, userId: userId }, { withCredentials: true });
             console.log(afterUpdateTodosResponse);
             setToDos(afterUpdateTodosResponse.data.data);
         }
-        catch(error){
+        catch (error) {
             console.error("Error fetching user data:", error);
             setToDos(null);
         }
     }
 
-    async function deleteToDo(idOfToDo){
+    async function deleteToDo(idOfToDo) {
         try {
-            const afterDeleteToDoResponse = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${userId}?toDoId=${idOfToDo}`,{withCredentials: true});
+            const afterDeleteToDoResponse = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/ourToDoApi/todo/${userId}?toDoId=${idOfToDo}`, { withCredentials: true });
             console.log(afterDeleteToDoResponse.data);
             setToDos(afterDeleteToDoResponse.data.data);
         } catch (error) {
@@ -119,12 +121,12 @@ function ShowTodos() {
         <div>
             {isUserIsRegistered ? (
                 <div className="main-to-do-container">
-                    {createBoxOpened && <CreateTodo userId={userId} onSubmit={createToDos}/>}
+                    {createBoxOpened && <CreateTodo userId={userId} onSubmit={createToDos} />}
                     <div className="container">
                         {/* Bhai user is: {userId} */}
                         <div className="d-flex">
                             <div className="container d-flex">
-                                <p>View Your Todos</p>
+                                <p>{user.username}'s Todos</p>
                                 <button type="button" className="btn show-to-do-button" onClick={handleShowButtonClick}>
                                     <img width="48" height="48" src="https://img.icons8.com/pulsar-line/48/FFFFFF/file-preview.png" alt="file-preview" />
                                 </button>
@@ -140,7 +142,7 @@ function ShowTodos() {
                         </div>
 
                     </div>
-                    {(userToDos && userToDos.length === 0) && ( <div className="container no-to-dos-message-container m-2 p-2"><h2>You Have no To Dos for Now....</h2></div> )}
+                    {(userToDos && userToDos.length === 0) && (<div className="container no-to-dos-message-container m-2 p-2"><h2>You Have no To Dos for Now....</h2></div>)}
                     {userToDos && userToDos.map((todo) => (
                         <ToDoCard
                             key={todo._id}

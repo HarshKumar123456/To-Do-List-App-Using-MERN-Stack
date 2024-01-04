@@ -12,7 +12,7 @@ passport.use(
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },
     (accessToken, refreshToken, profile, cb) => {
-      User.findOrCreate({ googleId: profile.id, password: "Are google se secured hai" }, function (err, user) {
+      User.findOrCreate({ username: profile.displayName,googleId: profile.id, password: `${profile.displayName} ko password ki kya jaroorat . Are google se secured hai` }, function (err, user) {
         return cb(err, user);
       });
     }

@@ -16,12 +16,12 @@ function Footer() {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to={"/create"} className="nav-link px-2 text-body-secondary">
-                        Create
-                    </Link>
+                    <a href="https://www.linkedin.com/in/harsh-kumar-158634233/" className="nav-link px-2 text-body-secondary">
+                        Developer's Contact
+                    </a>
                 </li>
             </ul>
-            <p className="text-center text-body-secondary">Copyright © {new Date().getFullYear()}</p>
+            <p className="text-center text-body-secondary">Copyright © 2004-{new Date().getFullYear()}</p>
         </footer>
     </div>;
 }

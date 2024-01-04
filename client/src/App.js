@@ -21,6 +21,7 @@ function App() {
        <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path="/view" element={<div className="home-page"><ShowTodos /></div>} />
+          <Route path="*" element={<div className="home-page"><ShowTodos /></div>} />
           <Route path="/create" element={<CreateTodo />} />
           <Route path="/edit" element={<EditTodos />} />
           <Route path="/delete" element={<DeleteTodos />} />

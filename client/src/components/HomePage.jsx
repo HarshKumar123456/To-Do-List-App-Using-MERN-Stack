@@ -7,7 +7,9 @@ import ShowTodos from "./ShowTodos";
 
 function HomePage() {
     const [isRegistered, setRegiteredStatus] = useState(false);
+    // eslint-disable-next-line 
     const [user, setUser] = useState();
+    // eslint-disable-next-line 
     const [userId, setUserId] = useState("");
 
 
@@ -41,7 +43,7 @@ function HomePage() {
     }, []);
 
 
-    console.log(user);
+    // console.log(user);
 
     return <div className="home-page">
         {isRegistered ? <ShowTodos /> : <RegisterPage onRegister={registerUser} />}

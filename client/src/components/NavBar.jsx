@@ -24,8 +24,8 @@ function Navbar() {
                             </span>
                         </li>
                         <li className="nav-item">
-                            <span className="nav-link" >
-                                <Link to="/create" className="nav-link">Create</Link>
+                            <span className="nav-link">
+                                <a href="https://www.linkedin.com/in/harsh-kumar-158634233/" className="nav-link">Developer's Contact</a>
                             </span>
                         </li>
                     </ul>

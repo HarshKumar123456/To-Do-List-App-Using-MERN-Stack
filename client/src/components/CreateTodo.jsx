@@ -19,7 +19,7 @@ function CreateTodo(props){
                 <input type="hidden" name="userId" value={props.userId}/>
                 <input type="text" onChange={handleChange} name="todoNewTitle" value={todo.todoNewTitle} placeholder="Enter To Do's Title like : Buy Milk"required/>
                 <input type="text" onChange={handleChange} name="todoNewDescription" value={todo.todoNewDescription} placeholder="Enter To Do's Description like : Buy AMUL milk for Baby"/>
-                <button className="btn btn-outline-light" onClick={handleAddButtonClick}>Add To Do</button>
+                <button className="btn btn-outline-success" onClick={handleAddButtonClick}>Add To Do</button>
             </form>
     </div>;
 }

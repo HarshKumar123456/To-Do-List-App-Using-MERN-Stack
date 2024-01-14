@@ -7,7 +7,7 @@ function NotRegistered() {
         <h2> Oops , Seems like you are not Logged In....... </h2>
         <div className="not-registered-go-to-home-saying-container">
       
-            <Link to="/" className="btn btn-outline-light">Login or Sign up</Link>
+            <Link to="/" className="btn btn-outline-primary">Login or Sign up</Link>
     
 
         </div>

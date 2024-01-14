@@ -37,7 +37,7 @@ function ShowTodos() {
 
         fetchData(); // Always fetch user data on component mount
 
-        
+
 
     }, [isUserIsRegistered]); // Run this effect only when isUserIsRegistered changes
 
@@ -128,7 +128,7 @@ function ShowTodos() {
                             <div className="container d-flex">
                                 <p>{user.username}'s Todos</p>
                                 <button type="button" className="btn show-to-do-button" onClick={handleShowButtonClick}>
-                                    <img width="48" height="48" src="https://img.icons8.com/pulsar-line/48/FFFFFF/file-preview.png" alt="file-preview" />
+                                    <img width="48" height="48" src="https://img.icons8.com/arcade/64/preview-pane.png" alt="preview-pane" />
                                 </button>
 
                             </div>
@@ -136,7 +136,7 @@ function ShowTodos() {
 
                                 <p>Create New Todo</p>
                                 <button type="button" className="btn show-to-do-button" onClick={handleCreateButtonClick}>
-                                    <img width="40" height="40" src="https://img.icons8.com/ios/50/FFFFFF/plus--v1.png" alt="plus--v1" />
+                                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/plus-math.png" alt="plus-math" />
                                 </button>
                             </div>
                         </div>
